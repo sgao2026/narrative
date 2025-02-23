@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovment : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerMovment : MonoBehaviour
     private float _xVelocity = 0f;
     private float _yVelocity = 0f;
     public float speed = 3;
+    public string nextScene = "Blacksmith";
 
     // Start is called before the first frame update
     void Start()
@@ -34,5 +36,17 @@ public class PlayerMovment : MonoBehaviour
 
         
         _rigRigidbody2D.velocity = new Vector2(_xVelocity, _yVelocity) * speed; 
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        switch (collision.tag)
+        {
+            case ("Doorway"):
+            {
+                    SceneManager.LoadScene(nextScene);
+                    break;
+            }
+        }
     }
 }
